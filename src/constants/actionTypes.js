@@ -10,3 +10,4 @@ export const UNDO = 'UNDO';
 export const UPDATE_PRESENCE = 'UPDATE_PRESENCE';
 export const CLEANUP_PRESENCE = 'CLEANUP_PRESENCE';
 export const SET_LEADER = 'SET_LEADER';
+export const REMOVE_PRESENCE = 'REMOVE_PRESENCE';

@@ -23,7 +23,7 @@ export function usePresence() {
   useEffect(() => {
     if (!tabId) return;
 
-    // 1. Listen for heartbeats
+    // 1. Listen for heartbeats and tab shutdowns
     const handlePresenceMessage = (message) => {
       const { type, payload } = message;
       if (type === 'HEARTBEAT') {
@@ -34,6 +34,11 @@ export function usePresence() {
             lastActive: Date.now(),
             isLeader: payload.isLeader,
           },
+        });
+      } else if (type === 'TAB_CLOSED') {
+        dispatch({
+          type: types.REMOVE_PRESENCE,
+          payload: { tabId: payload.tabId },
         });
       }
     };
@@ -78,12 +83,24 @@ export function usePresence() {
       },
     });
 
+    // 5. Broadcast close signal when unloading (reload or tab close)
+    const handleBeforeUnload = () => {
+      broadcastService.publish('TAB_CLOSED', { tabId });
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('beforeunload', handleBeforeUnload);
+    }
+
     return () => {
       unsubscribe();
       clearInterval(heartbeatInterval);
       clearInterval(cleanupInterval);
       if (typeof document !== 'undefined') {
         document.removeEventListener('visibilitychange', handleVisibilityChange);
+      }
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
       }
     };
   }, [tabId, leaderId, dispatch]);

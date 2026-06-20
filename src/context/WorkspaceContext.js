@@ -233,6 +233,29 @@ function workspaceReducer(state, action) {
       };
     }
 
+    case types.REMOVE_PRESENCE: {
+      const { tabId } = action.payload;
+      const nextPresence = { ...state.presence };
+      delete nextPresence[tabId];
+
+      let activeLeaderId = state.leaderId;
+      if (activeLeaderId === tabId) {
+        const activeTabs = Object.keys(nextPresence);
+        if (activeTabs.length > 0) {
+          activeTabs.sort();
+          activeLeaderId = activeTabs[0];
+        } else {
+          activeLeaderId = '';
+        }
+      }
+
+      return {
+        ...state,
+        presence: nextPresence,
+        leaderId: activeLeaderId,
+      };
+    }
+
     case types.CLEANUP_PRESENCE: {
       const now = Date.now();
       const nextPresence = { ...state.presence };
