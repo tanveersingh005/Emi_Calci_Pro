@@ -65,9 +65,7 @@ export default function WorkspaceHome() {
   // 2. Global Keyboard listener for Undo shortcut (Ctrl + Z)
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Check for Ctrl + Z or Cmd + Z
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
-        // Prevent default browser undo behavior if inside input (optional, but good for workspace)
         e.preventDefault();
         dispatch({ type: types.UNDO });
       }

@@ -79,7 +79,8 @@ export default function Header({ presenceInfo }) {
             >
               <RotateCcw className={`h-4.5 w-4.5 ${historyCount > 0 ? 'animate-spin-slow' : ''}`} />
               {historyCount > 0 && (
-                <span className="ml-1 text-[10px] bg-brand-primary text-slate-900 px-1.5 py-0.2 rounded-full font-bold">
+                <span className="ml-1 text-[10px] bg-brand-primary text-slate-200
+                 px-1.5 py-0.2 rounded-full font-bold">
                   {historyCount}
                 </span>
               )}
