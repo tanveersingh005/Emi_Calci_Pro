@@ -15,14 +15,14 @@
 }
 
 .dark {
-  --background: #0f172a; /* Slate 900 */
+  --background: #030712; /* Premium Deep Midnight Obsidian */
   --foreground: #f8fafc; /* Slate 50 */
   
-  --card-bg: #1e293b; /* Slate 800 (Solid dark background for cards) */
-  --card-border: #334155; /* Slate 700 */
+  --card-bg: #111827; /* Elevated Slate 900 Card */
+  --card-border: #1f2937; /* Slate 800 Border */
   
-  --brand-primary: #818cf8; /* Indigo 400 */
-  --brand-secondary: #6366f1; /* Indigo 500 */
+  --brand-primary: #6366f1; /* Indigo 500 */
+  --brand-secondary: #4f46e5; /* Indigo 600 */
   --accent: #3b82f6; /* Blue 500 */
 }
 
@@ -42,7 +42,7 @@ body {
 }
 
 .dark .glass-panel {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 
 /* Custom sliders */
@@ -57,7 +57,7 @@ input[type="range"] {
 }
 
 .dark input[type="range"] {
-  background: #334155;
+  background: #1f2937;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -75,6 +75,24 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="range"]::-webkit-slider-thumb:hover {
   background: var(--brand-secondary);
+}
+
+/* Premium Dark Mode Component Overrides */
+.dark .bg-slate-100 {
+  background-color: #030712 !important; /* Recessed to obsidian floor */
+}
+
+.dark .border-slate-200, 
+.dark .border-slate-200\/50 {
+  border-color: #1f2937 !important; /* Crisp dark border */
+}
+
+.dark table thead tr {
+  background-color: #090d16 !important; /* Slate header dark */
+}
+
+.dark table tbody tr:hover {
+  background-color: rgba(31, 41, 55, 0.3) !important;
 }
 
 /* Keyframes and Animations */
@@ -103,7 +121,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 ::-webkit-scrollbar-thumb:hover {
