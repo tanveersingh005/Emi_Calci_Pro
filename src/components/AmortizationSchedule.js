@@ -81,7 +81,7 @@ export default function AmortizationSchedule({ schedule }) {
               onClick={() => setViewMode('table')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
                 viewMode === 'table'
-                  ? 'bg-white dark:bg-slate-800 text-brand-primary shadow-sm'
+                  ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm'
                   : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
@@ -92,7 +92,7 @@ export default function AmortizationSchedule({ schedule }) {
               onClick={() => setViewMode('chart')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
                 viewMode === 'chart'
-                  ? 'bg-white dark:bg-slate-800 text-brand-primary shadow-sm'
+                  ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm'
                   : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
@@ -104,7 +104,7 @@ export default function AmortizationSchedule({ schedule }) {
           {/* Export to CSV Button */}
           <button
             onClick={handleExportCSV}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-brand-primary hover:bg-brand-secondary text-slate-900 font-bold text-xs shadow-lg shadow-emerald-500/10 transition-all duration-200 active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-600 text-white font-bold text-xs shadow-sm transition-all duration-150 active:scale-95"
           >
             <Download className="h-3.5 w-3.5" />
             <span>Export CSV</span>
@@ -114,7 +114,7 @@ export default function AmortizationSchedule({ schedule }) {
 
       {/* Break-even notification */}
       {breakEvenMonth && (
-        <div className="flex items-center gap-2.5 p-3.5 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/5 border border-indigo-500/20 text-xs text-indigo-700 dark:text-indigo-400">
+        <div className="flex items-center gap-2.5 p-3.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-900/50 text-xs text-indigo-700 dark:text-indigo-300">
           <AlertTriangle className="h-4.5 w-4.5 flex-shrink-0" />
           <span>
             <strong>Break-even Month: Month {breakEvenMonth}</strong>. This is when your principal component paid in the EMI starts exceeding the interest component.
@@ -144,7 +144,7 @@ export default function AmortizationSchedule({ schedule }) {
                       key={row.month}
                       className={`transition-colors ${
                         isBreakEven
-                          ? 'bg-indigo-500/10 dark:bg-indigo-500/5 font-semibold text-indigo-600 dark:text-indigo-400'
+                          ? 'bg-indigo-50 dark:bg-indigo-950/20 font-semibold text-indigo-700 dark:text-indigo-300'
                           : 'hover:bg-slate-100/30 dark:hover:bg-slate-900/30 text-slate-700 dark:text-slate-300'
                       }`}
                     >
@@ -216,8 +216,8 @@ export default function AmortizationSchedule({ schedule }) {
                   <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
                 </linearGradient>
                 <linearGradient id="colorInterest" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#00d09c" stopOpacity={0.4}/>
-                  <stop offset="95%" stopColor="#00d09c" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#10b981" stopOpacity={0.4}/>
+                  <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.1} />
@@ -256,7 +256,7 @@ export default function AmortizationSchedule({ schedule }) {
                 type="monotone"
                 dataKey="interestPaid"
                 stackId="1"
-                stroke="#00d09c"
+                stroke="#10b981"
                 fillOpacity={1}
                 fill="url(#colorInterest)"
               />

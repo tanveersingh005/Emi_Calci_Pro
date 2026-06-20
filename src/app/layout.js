@@ -2,7 +2,7 @@ import './globals.css';
 import { WorkspaceProvider } from '../context/WorkspaceContext';
 
 export const metadata = {
-  title: 'GrowwWorkspace - Collaborative Real-Time EMI Studio',
+  title: 'EMI Workspace - Collaborative Calculator',
   description: 'A collaborative, real-time shared workspace for financial planning, loan comparisons, prepayments, and sensitivity analysis.',
 };
 

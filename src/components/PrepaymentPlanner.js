@@ -120,7 +120,7 @@ export default function PrepaymentPlanner() {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-brand-primary hover:bg-brand-secondary text-slate-900 font-black text-xs shadow-lg shadow-emerald-500/10 transition-all duration-200 active:scale-95"
+                className="w-full flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-600 text-white font-bold text-xs shadow-sm transition-all duration-150 active:scale-95"
               >
                 <Plus className="h-4 w-4" />
                 <span>Add Prepayment</span>
@@ -133,21 +133,21 @@ export default function PrepaymentPlanner() {
             <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300">Financial Impact Summary</h3>
             
             <div className="space-y-3.5">
-              <div className="p-3 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/5 border border-emerald-500/10 flex justify-between items-center">
+              <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/50 flex justify-between items-center">
                 <div>
-                  <p className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Interest Saved</p>
-                  <p className="text-xl font-black text-brand-primary mt-0.5">{formatCurrency(impact.interestSaved)}</p>
+                  <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Interest Saved</p>
+                  <p className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-0.5">{formatCurrency(impact.interestSaved)}</p>
                 </div>
-                <PiggyBank className="h-8 w-8 text-brand-primary opacity-80" />
+                <PiggyBank className="h-8 w-8 text-emerald-600 dark:text-emerald-400 opacity-80" />
               </div>
 
-              <div className="p-3 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/5 border border-indigo-500/10 flex justify-between items-center">
+              <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-900/50 flex justify-between items-center">
                 <div>
-                  <p className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Tenure Shortened</p>
-                  <p className="text-base font-extrabold text-indigo-500 mt-0.5">{formatTenure(impact.tenureReduced)}</p>
-                  <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">({impact.newTenure} months remaining)</p>
+                  <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tenure Shortened</p>
+                  <p className="text-base font-extrabold text-indigo-600 dark:text-indigo-400 mt-0.5">{formatTenure(impact.tenureReduced)}</p>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">({impact.newTenure} months remaining)</p>
                 </div>
-                <Calendar className="h-8 w-8 text-indigo-500 opacity-80" />
+                <Calendar className="h-8 w-8 text-indigo-600 dark:text-indigo-400 opacity-80" />
               </div>
             </div>
           </div>

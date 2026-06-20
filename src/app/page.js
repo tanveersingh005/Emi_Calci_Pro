@@ -119,7 +119,7 @@ export default function WorkspaceHome() {
               onClick={() => handleTabChange(tab.id)}
               className={`py-3 px-6 text-sm font-semibold tracking-wide border-b-2 transition-all duration-200 -mb-[2px] ${
                 mode === tab.id
-                  ? 'border-brand-primary text-brand-primary font-bold'
+                  ? 'border-indigo-600 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400 font-bold'
                   : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
               }`}
             >
@@ -137,7 +137,7 @@ export default function WorkspaceHome() {
       {/* Footer */}
       <footer className="py-6 border-t border-slate-200 dark:border-slate-900 text-center text-xs text-slate-400 dark:text-slate-600 bg-slate-100/50 dark:bg-slate-950/50">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p>© {new Date().getFullYear()} GrowwWorkspace. All calculations are subject to standard financial rounding.</p>
+          <p>© {new Date().getFullYear()} EMI Workspace. All calculations are subject to standard financial rounding.</p>
           <div className="flex gap-4">
             <span>Press <kbd className="px-1.5 py-0.5 rounded border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-[10px]">Ctrl</kbd> + <kbd className="px-1.5 py-0.5 rounded border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-[10px]">Z</kbd> anywhere to Undo changes across tabs</span>
           </div>

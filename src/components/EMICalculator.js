@@ -41,7 +41,7 @@ export default function EMICalculator() {
   // Pie chart data preparation
   const chartData = useMemo(() => [
     { name: 'Principal Loan Amount', value: amount, color: '#4f46e5' }, // Indigo-600
-    { name: 'Total Interest Payable', value: totals.totalInterest, color: '#00d09c' }, // Groww Green
+    { name: 'Total Interest Payable', value: totals.totalInterest, color: '#10b981' }, // Solid Emerald
   ], [amount, totals.totalInterest]);
 
   const CustomTooltip = ({ active, payload }) => {
@@ -73,7 +73,7 @@ export default function EMICalculator() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-sm font-semibold text-slate-500 dark:text-slate-400">Loan Amount</label>
-              <div className="flex items-center bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-brand-primary/50 transition-all">
+              <div className="flex items-center bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-indigo-500/50 transition-all">
                 <span className="text-slate-400 dark:text-slate-500 text-sm font-bold mr-1">₹</span>
                 <input
                   type="number"
@@ -96,7 +96,7 @@ export default function EMICalculator() {
             />
             <div className="flex justify-between text-[10px] text-slate-400 dark:text-slate-500">
               <span>₹1 Lakh</span>
-              <span className="font-semibold text-brand-primary">{formatCurrency(amount)}</span>
+              <span className="font-semibold text-indigo-600 dark:text-indigo-400">{formatCurrency(amount)}</span>
               <span>₹2 Crore</span>
             </div>
           </div>
@@ -105,7 +105,7 @@ export default function EMICalculator() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-sm font-semibold text-slate-500 dark:text-slate-400">Interest Rate (p.a.)</label>
-              <div className="flex items-center bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-brand-primary/50 transition-all">
+              <div className="flex items-center bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-indigo-500/50 transition-all">
                 <input
                   type="number"
                   step="0.05"
@@ -129,7 +129,7 @@ export default function EMICalculator() {
             />
             <div className="flex justify-between text-[10px] text-slate-400 dark:text-slate-500">
               <span>1%</span>
-              <span className="font-semibold text-brand-primary">{rate}%</span>
+              <span className="font-semibold text-indigo-600 dark:text-indigo-400">{rate}%</span>
               <span>25%</span>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function EMICalculator() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-sm font-semibold text-slate-500 dark:text-slate-400">Loan Tenure</label>
-              <div className="flex items-center bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-brand-primary/50 transition-all">
+              <div className="flex items-center bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-indigo-500/50 transition-all">
                 <input
                   type="number"
                   value={tenure || ''}
@@ -161,7 +161,7 @@ export default function EMICalculator() {
             />
             <div className="flex justify-between text-[10px] text-slate-400 dark:text-slate-500">
               <span>1 Yr (12 Mos)</span>
-              <span className="font-semibold text-brand-primary">{formatTenure(tenure)}</span>
+              <span className="font-semibold text-indigo-600 dark:text-indigo-400">{formatTenure(tenure)}</span>
               <span>30 Yrs (360 Mos)</span>
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function EMICalculator() {
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4 mb-6">
               <div className="p-4 rounded-xl bg-slate-100/50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-800/50">
                 <p className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Monthly Installment (EMI)</p>
-                <p className="text-2xl font-black text-brand-primary mt-1">{formatCurrency(emi, true)}</p>
+                <p className="text-2xl font-black text-indigo-600 dark:text-indigo-400 mt-1">{formatCurrency(emi, true)}</p>
               </div>
 
               <div className="p-4 rounded-xl bg-slate-100/50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-800/50">

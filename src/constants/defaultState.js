@@ -10,7 +10,7 @@ export const INITIAL_STATE = {
     { id: 3, amount: 5000000, rate: 8.5, tenure: 180, label: "Scenario 3" },
   ],
   prepayments: [], // array of { month: number, amount: number }
-  theme: 'dark',
+  theme: 'light',
   mode: 'single', // 'single' | 'comparison' | 'prepayment' | 'sensitivity'
   presence: {}, // tabId -> { lastActive: timestamp, isLeader: boolean }
   tabId: null, // set dynamically at runtime

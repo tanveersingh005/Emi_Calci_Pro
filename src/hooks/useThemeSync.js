@@ -23,13 +23,13 @@ export function useThemeSync() {
   const toggleTheme = () => {
     dispatch({
       type: SET_THEME,
-      payload: theme === 'dark' ? 'light' : 'dark',
+      payload: theme === 'light' ? 'dark' : 'light',
     });
   };
 
   return {
     theme,
     toggleTheme,
-    isDark: theme === 'dark',
+    isLight: theme === 'light',
   };
 }

@@ -3,7 +3,7 @@
 import React from 'react';
 import { useComparison } from '../hooks/useComparison';
 import { formatCurrency, formatTenure } from '../utils/formatters';
-import { Sparkles, Calendar, Percent, Landmark } from 'lucide-react';
+import { Check, Calendar, Percent, Landmark } from 'lucide-react';
 
 export default function LoanComparison() {
   const { scenarios, updateScenario } = useComparison();
@@ -41,16 +41,16 @@ export default function LoanComparison() {
               key={id}
               className={`relative glass-panel rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between border ${
                 isCheapest
-                  ? 'border-brand-primary/50 shadow-lg shadow-emerald-500/5 ring-1 ring-brand-primary/20 bg-gradient-to-b from-brand-primary/[0.02] to-transparent'
+                  ? 'border-indigo-600 dark:border-indigo-500 bg-indigo-500/[0.03] dark:bg-indigo-500/[0.02]'
                   : 'border-slate-200 dark:border-slate-800'
               }`}
             >
               
               {/* Cheapest Badge */}
               {isCheapest && (
-                <div className="absolute -top-3 right-6 flex items-center gap-1 px-3 py-1 rounded-full bg-brand-primary text-slate-900 text-[10px] font-black uppercase tracking-wider shadow-md">
-                  <Sparkles className="h-3 w-3" />
-                  <span>Cheapest Loan</span>
+                <div className="absolute -top-3 right-6 flex items-center gap-1 px-3 py-1 rounded-lg bg-indigo-600 dark:bg-indigo-500 text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
+                  <Check className="h-3.5 w-3.5" />
+                  <span>Cheapest Scenario</span>
                 </div>
               )}
 
@@ -116,7 +116,7 @@ export default function LoanComparison() {
               <div className="border-t border-slate-200 dark:border-slate-800 pt-6 mt-6 space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-slate-400 dark:text-slate-500">Monthly EMI:</span>
-                  <span className="text-base font-black text-brand-primary">{formatCurrency(emi, true)}</span>
+                  <span className="text-base font-black text-indigo-600 dark:text-indigo-400">{formatCurrency(emi, true)}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-slate-400 dark:text-slate-500">Interest Payable:</span>

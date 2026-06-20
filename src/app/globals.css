@@ -3,48 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #f8fafc; /* Slate 50 */
+  --foreground: #0f172a; /* Slate 900 */
   
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --card-border: rgba(148, 163, 184, 0.15);
+  --card-bg: #ffffff; /* Solid white */
+  --card-border: #e2e8f0; /* Slate 200 */
   
-  --brand-primary: #00d09c; /* Groww Green */
-  --brand-secondary: #00b386;
-  --accent: #5367ff;
+  --brand-primary: #4f46e5; /* Indigo 600 */
+  --brand-secondary: #4338ca; /* Indigo 700 */
+  --accent: #2563eb; /* Blue 600 */
 }
 
 .dark {
-  --background: #0b0f19;
-  --foreground: #f8fafc;
+  --background: #0f172a; /* Slate 900 */
+  --foreground: #f8fafc; /* Slate 50 */
   
-  --card-bg: rgba(17, 24, 39, 0.6);
-  --card-border: rgba(255, 255, 255, 0.05);
+  --card-bg: #1e293b; /* Slate 800 (Solid dark background for cards) */
+  --card-border: #334155; /* Slate 700 */
   
-  --brand-primary: #00d09c;
-  --brand-secondary: #00b386;
-  --accent: #6366f1;
+  --brand-primary: #818cf8; /* Indigo 400 */
+  --brand-secondary: #6366f1; /* Indigo 500 */
+  --accent: #3b82f6; /* Blue 500 */
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
   overflow-x: hidden;
 }
 
-/* Custom Glassmorphism styles */
+/* Custom Traditional Panel styles (removes glass blur/AI aesthetics) */
 .glass-panel {
   background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--card-border);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
 }
 
 .dark .glass-panel {
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Custom sliders */
@@ -52,30 +50,30 @@ input[type="range"] {
   -webkit-appearance: none;
   width: 100%;
   height: 6px;
-  background: rgba(148, 163, 184, 0.2);
+  background: #e2e8f0;
   border-radius: 9999px;
   outline: none;
   transition: all 0.2s ease;
 }
 
 .dark input[type="range"] {
-  background: rgba(255, 255, 255, 0.1);
+  background: #334155;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: var(--brand-primary);
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 208, 156, 0.4);
-  transition: transform 0.1s ease, background-color 0.2s ease;
+  border: 2px solid var(--card-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.2s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
   background: var(--brand-secondary);
 }
 

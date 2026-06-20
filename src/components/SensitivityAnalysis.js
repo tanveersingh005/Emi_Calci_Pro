@@ -25,9 +25,9 @@ export default function SensitivityAnalysis() {
             Simulate how changes in the interest rate (±1%, ±2%, ±3%) and tenure (±6, ±12, ±24 months) impact your monthly EMI.
           </p>
         </div>
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-400 dark:text-slate-500">
+        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-500 dark:text-slate-400 font-medium">
           <Info className="h-3.5 w-3.5" />
-          <span>Active parameters highlighted in emerald green.</span>
+          <span>Active parameters highlighted in indigo.</span>
         </div>
       </div>
 
@@ -108,7 +108,7 @@ export default function SensitivityAnalysis() {
                           key={t}
                           className={`py-3 px-4 border-r border-slate-200 dark:border-slate-800 font-mono text-xs ${
                             isActiveCell
-                              ? 'bg-brand-primary/20 dark:bg-brand-primary/10 border-2 border-brand-primary font-black text-brand-primary shadow-inner scale-105'
+                              ? 'bg-indigo-50 dark:bg-indigo-950/50 border-2 border-indigo-600 dark:border-indigo-400 font-bold text-indigo-700 dark:text-indigo-300 scale-105'
                               : isCurrentR || isCurrentT
                               ? 'bg-slate-100/30 dark:bg-slate-900/30 text-slate-700 dark:text-slate-300'
                               : 'text-slate-500 dark:text-slate-400'
@@ -117,7 +117,7 @@ export default function SensitivityAnalysis() {
                           <div className="flex flex-col items-center">
                             <span className="font-bold">{formatCurrency(cellValue)}</span>
                             {isActiveCell ? (
-                              <span className="text-[9px] text-brand-secondary font-black uppercase tracking-wider mt-0.5">
+                              <span className="text-[9px] text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-wider mt-0.5">
                                 Current
                               </span>
                             ) : varianceText ? (
