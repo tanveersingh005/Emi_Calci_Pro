@@ -1,0 +1,12 @@
+export const UPDATE_INPUTS = 'UPDATE_INPUTS';
+export const UPDATE_COMPARISON = 'UPDATE_COMPARISON';
+export const ADD_PREPAYMENT = 'ADD_PREPAYMENT';
+export const REMOVE_PREPAYMENT = 'REMOVE_PREPAYMENT';
+export const CLEAR_PREPAYMENTS = 'CLEAR_PREPAYMENTS';
+export const SET_THEME = 'SET_THEME';
+export const SET_MODE = 'SET_MODE';
+export const SYNC_STATE = 'SYNC_STATE';
+export const UNDO = 'UNDO';
+export const UPDATE_PRESENCE = 'UPDATE_PRESENCE';
+export const CLEANUP_PRESENCE = 'CLEANUP_PRESENCE';
+export const SET_LEADER = 'SET_LEADER';
