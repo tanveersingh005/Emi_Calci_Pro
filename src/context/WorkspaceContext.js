@@ -235,17 +235,27 @@ function workspaceReducer(state, action) {
 
     case types.CLEANUP_PRESENCE: {
       const now = Date.now();
-      const nextPresence = {};
-      let activeLeaderId = state.leaderId;
+      const nextPresence = { ...state.presence };
 
-      Object.entries(state.presence).forEach(([tId, info]) => {
-        if (now - info.lastActive <= 3000) {
-          nextPresence[tId] = info;
+      // Ensure this tab keeps its own entry updated locally so it never prunes itself
+      if (state.tabId) {
+        nextPresence[state.tabId] = {
+          lastActive: now,
+          isLeader: state.tabId === state.leaderId,
+        };
+      }
+
+      const prunedPresence = {};
+      Object.entries(nextPresence).forEach(([tId, info]) => {
+        // Use a stable 3.5 second window to accommodate tab rendering/event loop latency
+        if (now - info.lastActive <= 3500) {
+          prunedPresence[tId] = info;
         }
       });
 
-      // Recalculate Leader based on presence
-      const activeTabs = Object.keys(nextPresence);
+      // Recalculate Leader based on the clean presence map
+      let activeLeaderId = state.leaderId;
+      const activeTabs = Object.keys(prunedPresence);
       if (activeTabs.length > 0) {
         // Sort lexicographically
         activeTabs.sort();
@@ -256,7 +266,7 @@ function workspaceReducer(state, action) {
 
       return {
         ...state,
-        presence: nextPresence,
+        presence: prunedPresence,
         leaderId: activeLeaderId,
       };
     }

@@ -57,6 +57,17 @@ export function usePresence() {
       dispatch({ type: types.CLEANUP_PRESENCE });
     }, 1000);
 
+    // 3b. Force quick heartbeat on visibility focus to counter browser background thread throttling
+    const handleVisibilityChange = () => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        sendHeartbeat();
+        dispatch({ type: types.CLEANUP_PRESENCE });
+      }
+    };
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+    }
+
     // 4. Send tab ID on presence start
     dispatch({
       type: types.UPDATE_PRESENCE,
@@ -71,6 +82,9 @@ export function usePresence() {
       unsubscribe();
       clearInterval(heartbeatInterval);
       clearInterval(cleanupInterval);
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+      }
     };
   }, [tabId, leaderId, dispatch]);
 
