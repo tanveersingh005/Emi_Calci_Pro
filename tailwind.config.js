@@ -11,6 +11,9 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "brand-primary": "var(--brand-primary)",
+        "brand-secondary": "var(--brand-secondary)",
+        "accent": "var(--accent)",
       },
     },
   },
