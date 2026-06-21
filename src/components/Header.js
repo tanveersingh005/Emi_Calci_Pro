@@ -21,24 +21,24 @@ export default function Header({ presenceInfo }) {
       <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         
         {/* Brand / Logo */}
-        <div className="flex items-center gap-2.5">
-          <div className="h-9 w-9 rounded-lg bg-indigo-600 dark:bg-indigo-500 flex items-center justify-center shadow-sm">
+        <div className="flex items-center gap-2 sm:gap-2.5 flex-shrink-0">
+          <div className="h-9 w-9 rounded-lg bg-indigo-600 dark:bg-indigo-500 flex items-center justify-center shadow-sm flex-shrink-0">
             <Calculator className="h-5 w-5 text-white" />
           </div>
-          <div>
-            <h1 className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
+          <div className="flex flex-col justify-center">
+            <h1 className="font-extrabold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white whitespace-nowrap">
               EMI <span className="text-indigo-600 dark:text-indigo-400">Workspace</span>
             </h1>
-            <p className="text-[9px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Shared Financial Studio</p>
+            <p className="hidden sm:block text-[9px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Shared Financial Studio</p>
           </div>
         </div>
 
         {/* Workspace Presence & Shared Actions */}
-        <div className="flex items-center gap-3 sm:gap-6">
+        <div className="flex items-center gap-2 sm:gap-3.5">
           
           {/* Active Tabs Indicators */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 font-medium">
-            <Users className="h-4 w-4 text-slate-500 dark:text-slate-400" />
+          <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 font-medium flex-shrink-0">
+            <Users className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
             <span className="font-bold">{presenceInfo.activeCount}</span>
             <span className="hidden sm:inline text-slate-500 dark:text-slate-400">active tabs</span>
           </div>
@@ -66,7 +66,7 @@ export default function Header({ presenceInfo }) {
           <div className="h-6 w-px bg-slate-200 dark:bg-slate-800" />
 
           {/* Workspace History Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <button
               onClick={handleUndo}
               disabled={historyCount === 0}
