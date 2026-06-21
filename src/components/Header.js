@@ -51,14 +51,14 @@ export default function Header({ presenceInfo }) {
 
           {/* Leader Indicator */}
           {presenceInfo.isLeader ? (
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/50 text-indigo-700 dark:text-indigo-400 text-xs font-bold shadow-sm">
+            <div className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/50 text-indigo-700 dark:text-indigo-400 text-xs font-bold shadow-sm flex-shrink-0">
               <span className="h-2 w-2 rounded-full bg-indigo-600 dark:bg-indigo-500" />
-              <span>Workspace Leader</span>
+              <span><span className="hidden sm:inline">Workspace </span>Leader</span>
             </div>
           ) : (
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-800/80 text-xs font-semibold">
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-800/80 text-xs font-semibold flex-shrink-0">
               <span className="h-1.5 w-1.5 rounded-full bg-slate-400 dark:bg-slate-600" />
-              <span>Workspace Member</span>
+              <span>Member</span>
             </div>
           )}
 

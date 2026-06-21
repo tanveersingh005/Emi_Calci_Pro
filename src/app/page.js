@@ -105,7 +105,7 @@ export default function WorkspaceHome() {
 
       {/* Main Workspace Navigation Tabs */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
-        <div className="flex border-b border-slate-200 dark:border-slate-800">
+        <div className="flex border-b border-slate-200 dark:border-slate-800 overflow-x-auto whitespace-nowrap scrollbar-none -mx-4 px-4 md:mx-0 md:px-0 scroll-smooth">
           {[
             { id: 'single', label: 'Single' },
             { id: 'comparison', label: 'Loan Comparison' },
@@ -115,7 +115,7 @@ export default function WorkspaceHome() {
             <button
               key={tab.id}
               onClick={() => handleTabChange(tab.id)}
-              className={`py-3 px-6 text-sm font-semibold tracking-wide border-b-2 transition-all duration-200 -mb-[2px] ${
+              className={`py-3 px-5 md:px-6 text-sm font-semibold tracking-wide border-b-2 transition-all duration-200 -mb-[2px] flex-shrink-0 ${
                 mode === tab.id
                   ? 'border-indigo-600 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400 font-bold'
                   : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
