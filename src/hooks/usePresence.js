@@ -23,23 +23,87 @@ export function usePresence() {
   useEffect(() => {
     if (!tabId) return;
 
-    // 1. Listen for heartbeats and tab shutdowns
-    const handlePresenceMessage = (message) => {
-      const { type, payload } = message;
-      if (type === 'HEARTBEAT') {
+    // Helper: Write our presence key to localStorage
+    const writeSelfPresence = () => {
+      try {
+        const currentTabId = stateRef.current.tabId;
+        if (!currentTabId || typeof window === 'undefined' || !localStorage) return;
+        const currentIsLeader = stateRef.current.tabId === stateRef.current.leaderId;
+        localStorage.setItem(`emi_presence_${currentTabId}`, JSON.stringify({
+          tabId: currentTabId,
+          lastActive: Date.now(),
+          isLeader: currentIsLeader
+        }));
+      } catch (e) {
+        console.warn('localStorage is disabled or unavailable.', e);
+      }
+    };
+
+    // Helper: Read and clean presence keys in localStorage, then dispatch
+    const compilePresence = () => {
+      try {
+        if (typeof window === 'undefined' || !localStorage) return;
+        const now = Date.now();
+        const presenceMap = {};
+        
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('emi_presence_')) {
+            try {
+              const data = JSON.parse(localStorage.getItem(key));
+              // 45-second timeout to easily tolerate throttled background tabs
+              if (now - data.lastActive <= 45000) {
+                presenceMap[data.tabId] = {
+                  lastActive: data.lastActive,
+                  isLeader: data.isLeader
+                };
+              } else {
+                localStorage.removeItem(key); // Cleanup stale/crashed tab key
+              }
+            } catch (e) {
+              console.error('Error parsing presence record', e);
+            }
+          }
+        }
+
+        // Ensure self is in the map
+        const currentTabId = stateRef.current.tabId;
+        if (currentTabId) {
+          const currentIsLeader = stateRef.current.tabId === stateRef.current.leaderId;
+          presenceMap[currentTabId] = {
+            lastActive: now,
+            isLeader: currentIsLeader
+          };
+        }
+
+        // Deterministic leader selection
+        const activeIds = Object.keys(presenceMap);
+        let electedLeaderId = stateRef.current.leaderId;
+        if (activeIds.length > 0) {
+          activeIds.sort();
+          electedLeaderId = activeIds[0];
+        } else {
+          electedLeaderId = currentTabId;
+        }
+
         dispatch({
-          type: types.UPDATE_PRESENCE,
+          type: types.SYNC_PRESENCE,
           payload: {
-            tabId: payload.tabId,
-            lastActive: Date.now(),
-            isLeader: payload.isLeader,
-          },
+            presence: presenceMap,
+            leaderId: electedLeaderId
+          }
         });
-      } else if (type === 'TAB_CLOSED') {
-        dispatch({
-          type: types.REMOVE_PRESENCE,
-          payload: { tabId: payload.tabId },
-        });
+      } catch (e) {
+        console.warn('Failed to compile presence list from localStorage.', e);
+      }
+    };
+
+    // 1. Listen for heartbeats and tab shutdowns on the BroadcastChannel
+    const handlePresenceMessage = (message) => {
+      const { type } = message;
+      // Compile immediately when a tab joins (heartbeat) or leaves (closed)
+      if (type === 'HEARTBEAT' || type === 'TAB_CLOSED') {
+        compilePresence();
       }
     };
 
@@ -48,44 +112,44 @@ export function usePresence() {
     // 2. Broadcast own heartbeat immediately and then every 1000ms
     const sendHeartbeat = () => {
       const currentIsLeader = stateRef.current.tabId === stateRef.current.leaderId;
+      // Update our localStorage presence stamp
+      writeSelfPresence();
+      // Publish heartbeat on channel
       broadcastService.publish('HEARTBEAT', {
         tabId: stateRef.current.tabId,
         isLeader: currentIsLeader,
       });
+      // Compile presence registry
+      compilePresence();
     };
 
-    sendHeartbeat(); // Immediate
+    // Initial immediate invocation
+    sendHeartbeat();
+
     const heartbeatInterval = setInterval(sendHeartbeat, 1000);
 
-    // 3. Cleanup stale tabs (>3s inactive) every 1000ms
-    const cleanupInterval = setInterval(() => {
-      dispatch({ type: types.CLEANUP_PRESENCE });
-    }, 1000);
-
-    // 3b. Force quick heartbeat on visibility focus to counter browser background thread throttling
+    // 3. Visibility Change: force immediate refresh to handle thread sleeping
     const handleVisibilityChange = () => {
       if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
         sendHeartbeat();
-        dispatch({ type: types.CLEANUP_PRESENCE });
       }
     };
+
     if (typeof document !== 'undefined') {
       document.addEventListener('visibilitychange', handleVisibilityChange);
     }
 
     // 4. Send tab ID on presence start
-    dispatch({
-      type: types.UPDATE_PRESENCE,
-      payload: {
-        tabId,
-        lastActive: Date.now(),
-        isLeader: tabId === leaderId,
-      },
-    });
+    writeSelfPresence();
+    compilePresence();
 
-    // 5. Broadcast close signal when unloading (reload or tab close)
+    // 5. Broadcast close signal when unloading (reload or tab close) and delete localStorage presence key
     const handleBeforeUnload = () => {
-      broadcastService.publish('TAB_CLOSED', { tabId });
+      const currentTabId = stateRef.current.tabId;
+      if (currentTabId && typeof window !== 'undefined' && localStorage) {
+        localStorage.removeItem(`emi_presence_${currentTabId}`);
+      }
+      broadcastService.publish('TAB_CLOSED', { tabId: currentTabId });
     };
 
     if (typeof window !== 'undefined') {
@@ -95,7 +159,6 @@ export function usePresence() {
     return () => {
       unsubscribe();
       clearInterval(heartbeatInterval);
-      clearInterval(cleanupInterval);
       if (typeof document !== 'undefined') {
         document.removeEventListener('visibilitychange', handleVisibilityChange);
       }
@@ -103,7 +166,7 @@ export function usePresence() {
         window.removeEventListener('beforeunload', handleBeforeUnload);
       }
     };
-  }, [tabId, leaderId, dispatch]);
+  }, [tabId, dispatch]);
 
   return {
     tabId,

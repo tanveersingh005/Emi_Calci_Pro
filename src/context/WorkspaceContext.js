@@ -301,6 +301,15 @@ function workspaceReducer(state, action) {
       };
     }
 
+    case types.SYNC_PRESENCE: {
+      const { presence, leaderId } = action.payload;
+      return {
+        ...state,
+        presence,
+        leaderId,
+      };
+    }
+
     case 'SET_TAB_ID': {
       return {
         ...state,
