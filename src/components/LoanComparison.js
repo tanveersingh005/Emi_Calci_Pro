@@ -41,14 +41,14 @@ export default function LoanComparison() {
               key={id}
               className={`relative glass-panel rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between border ${
                 isCheapest
-                  ? 'border-indigo-600 dark:border-indigo-500 bg-indigo-500/[0.03] dark:bg-indigo-500/[0.02]'
+                  ? 'border-emerald-500 dark:border-emerald-600 bg-emerald-500/[0.02] dark:bg-emerald-500/[0.015]'
                   : 'border-slate-200 dark:border-slate-800'
               }`}
             >
               
               {/* Cheapest Badge */}
               {isCheapest && (
-                <div className="absolute -top-3 right-6 flex items-center gap-1 px-3 py-1 rounded-lg bg-indigo-600 dark:bg-indigo-500 text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
+                <div className="absolute -top-3 right-6 flex items-center gap-1 px-3 py-1 rounded-lg bg-emerald-500 dark:bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
                   <Check className="h-3.5 w-3.5" />
                   <span>Cheapest Scenario</span>
                 </div>
@@ -57,8 +57,8 @@ export default function LoanComparison() {
               {/* Title & Editable Inputs */}
               <div className="space-y-5">
                 <div>
-                  <h3 className="text-base font-extrabold text-slate-700 dark:text-slate-300">{label}</h3>
-                  <div className="h-0.5 w-10 bg-slate-200 dark:bg-slate-800 mt-1.5" />
+                  <h3 className={`text-base font-extrabold ${isCheapest ? 'text-emerald-600 dark:text-emerald-450' : 'text-slate-700 dark:text-slate-300'}`}>{label}</h3>
+                  <div className={`h-0.5 w-10 mt-1.5 ${isCheapest ? 'bg-emerald-500 dark:bg-emerald-600' : 'bg-slate-200 dark:bg-slate-800'}`} />
                 </div>
 
                 <div className="space-y-4">
@@ -71,7 +71,9 @@ export default function LoanComparison() {
                       type="number"
                       value={amount || ''}
                       onChange={(e) => handleFieldChange(id, 'amount', e.target.value)}
-                      className="w-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 text-sm font-bold outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all text-slate-800 dark:text-slate-100"
+                      className={`w-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 text-sm font-bold outline-none transition-all text-slate-800 dark:text-slate-100 ${
+                        isCheapest ? 'focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500' : 'focus:ring-2 focus:ring-brand-primary/30 focus:border-brand-primary'
+                      }`}
                       min="0"
                     />
                   </div>
@@ -86,7 +88,9 @@ export default function LoanComparison() {
                       step="0.05"
                       value={rate || ''}
                       onChange={(e) => handleFieldChange(id, 'rate', e.target.value)}
-                      className="w-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 text-sm font-bold outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all text-slate-800 dark:text-slate-100"
+                      className={`w-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 text-sm font-bold outline-none transition-all text-slate-800 dark:text-slate-100 ${
+                        isCheapest ? 'focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500' : 'focus:ring-2 focus:ring-brand-primary/30 focus:border-brand-primary'
+                      }`}
                       min="0"
                     />
                   </div>
@@ -101,7 +105,9 @@ export default function LoanComparison() {
                         type="number"
                         value={tenure || ''}
                         onChange={(e) => handleFieldChange(id, 'tenure', e.target.value)}
-                        className="w-2/3 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 text-sm font-bold outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all text-slate-800 dark:text-slate-100"
+                        className={`w-2/3 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 text-sm font-bold outline-none transition-all text-slate-800 dark:text-slate-100 ${
+                          isCheapest ? 'focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500' : 'focus:ring-2 focus:ring-brand-primary/30 focus:border-brand-primary'
+                        }`}
                         min="0"
                       />
                       <div className="w-1/3 bg-slate-200/50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg flex items-center justify-center text-[10px] text-slate-500 dark:text-slate-400 font-bold">
@@ -116,7 +122,7 @@ export default function LoanComparison() {
               <div className="border-t border-slate-200 dark:border-slate-800 pt-6 mt-6 space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-slate-400 dark:text-slate-500">Monthly EMI:</span>
-                  <span className="text-base font-black text-indigo-600 dark:text-indigo-400">{formatCurrency(emi, true)}</span>
+                  <span className={`text-base font-black ${isCheapest ? 'text-emerald-600 dark:text-emerald-400' : 'text-indigo-600 dark:text-indigo-400'}`}>{formatCurrency(emi, true)}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-slate-400 dark:text-slate-500">Interest Payable:</span>

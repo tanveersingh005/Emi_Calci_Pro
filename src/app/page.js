@@ -107,7 +107,7 @@ export default function WorkspaceHome() {
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
         <div className="flex border-b border-slate-200 dark:border-slate-800">
           {[
-            { id: 'single', label: 'EMI Calculator' },
+            { id: 'single', label: 'Single' },
             { id: 'comparison', label: 'Loan Comparison' },
             { id: 'prepayment', label: 'Prepayment Planner' },
             { id: 'sensitivity', label: 'Sensitivity Grid' },
