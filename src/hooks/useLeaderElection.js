@@ -13,10 +13,30 @@ export function useLeaderElection() {
   useEffect(() => {
     if (!tabId) return;
 
-    // Send a request for state to all tabs.
-    // The active leader tab will reply with its current state.
-    broadcastService.publish('REQUEST_STATE', {
-      requestingTabId: tabId,
-    });
+    const requestState = () => {
+      broadcastService.publish('REQUEST_STATE', {
+        requestingTabId: tabId,
+      });
+    };
+
+    // 1. Request state upon mount/identity resolution
+    requestState();
+
+    // 2. Request state on visibility focus (solves background browser thread throttling)
+    const handleVisibilityChange = () => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        requestState();
+      }
+    };
+
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+    }
+
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+      }
+    };
   }, [tabId]);
 }
